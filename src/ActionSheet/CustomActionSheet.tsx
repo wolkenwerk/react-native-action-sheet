@@ -227,8 +227,10 @@ export default class CustomActionSheet extends React.Component<Props, State> {
         this._deferAfterAnimation = undefined;
       }
     });
-    // @ts-ignore: Argument of type '"actionSheetHardwareBackPress"' is not assignable to parameter of type '"hardwareBackPress"'
-    BackHandler.addEventListener('actionSheetHardwareBackPress', this._selectCancelButton);
+   if(Platform.OS !== "web"){
+     // @ts-ignore: Argument of type '"actionSheetHardwareBackPress"' is not assignable to parameter of type '"hardwareBackPress"'
+     BackHandler.addEventListener('actionSheetHardwareBackPress', this._selectCancelButton);
+   }
   };
 
   _selectCancelButton = () => {
@@ -269,8 +271,10 @@ export default class CustomActionSheet extends React.Component<Props, State> {
       return false;
     }
 
-    // @ts-ignore: Argument of type '"actionSheetHardwareBackPress"' is not assignable to parameter of type '"hardwareBackPress"'
-    BackHandler.removeEventListener('actionSheetHardwareBackPress', this._selectCancelButton);
+if(Platform.OS !== "web"){
+      // @ts-ignore: Argument of type '"actionSheetHardwareBackPress"' is not assignable to parameter of type '"hardwareBackPress"'
+      BackHandler.removeEventListener('actionSheetHardwareBackPress', this._selectCancelButton);
+}
     this.setState({
       isAnimating: true,
     });
